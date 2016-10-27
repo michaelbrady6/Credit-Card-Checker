@@ -7,13 +7,16 @@ public class CCC
 		static int ran = 0;
 		public static void main(String[] args)throws IOException
 			{
-				Scanner file = new Scanner(new File("creditCardNumbers.txt"));
+				Scanner file = new Scanner(new File("creditCardNumbers2.txt"));
+				Scanner input = new Scanner(System.in);
 				int total = 0;
 				boolean a = true;
 				long d2 = 0;
 				int count = 0;
+				System.out.println("How many numbers do you want?");
+				int n = input.nextInt();
 				ArrayList valid = new ArrayList<Long>();
-				for (int i = 0; i < 100; i++)
+				while (count < n )
 					{
 						random();
 						valid.add(num);
@@ -47,7 +50,6 @@ public class CCC
 						if (total % 10 == 0)
 							{
 								count++;
-								
 							}
 						if (total % 10 != 0)
 							{
@@ -57,15 +59,23 @@ public class CCC
 					}
 				for (int i = 0; i < valid.size(); i++)
 					{
-						System.out.println(valid.get(i));
+						if (valid.get(i).toString().length() < 16)
+							{
+								valid.remove(i);
+								count--;
+							}
+						else
+							{
+								System.out.println(valid.get(i));
+							}
 					}
-				System.out.println(count + " of these numbers are valid");
+				System.out.println(count + " of these numbers are potentially valid");
 			}
 		public static void random()
 		{
 			for (int i = 0; i < 16; i++)
 				{
-					ran = (int) (Math.random()*10);
+					ran = (int) (Math.random()*9 + 1);
 					num +=  ran * Math.pow(10, i);
 				}
 		}
